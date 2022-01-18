@@ -10,7 +10,9 @@ import {
   TestedCell,
   VaccineDosesCell,
 } from "../../utils/TableLabelCell";
-import { Line } from "@ant-design/plots";
+import MapContainer from "./mapContainer";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 import AutoType from "../../utils/autoType";
 import {
   BellOutlined,
@@ -51,38 +53,6 @@ function Home() {
   const [casesReportDate, setTotalCasesReportDate] = useState([]);
 
   const [data, setData] = useState([]);
-  const config = {
-    data,
-    padding: "auto",
-    xField: "Date",
-    yField: "scales",
-    annotations: [
-      {
-        type: "regionFilter",
-        start: ["min", "median"],
-        end: ["max", "0"],
-        color: "#F4664A",
-      },
-      {
-        type: "text",
-        position: ["min", "median"],
-        content: "中位数",
-        offsetY: -4,
-        style: {
-          textBaseline: "bottom",
-        },
-      },
-      {
-        type: "line",
-        start: ["min", "median"],
-        end: ["max", "median"],
-        style: {
-          stroke: "#F4664A",
-          lineDash: [2, 2],
-        },
-      },
-    ],
-  };
 
   useEffect(async () => {
     let totalConfirmedCase = [];
@@ -158,7 +128,7 @@ function Home() {
       ),
     },
     {
-      title: "Tested",
+      title: " Tested ",
       render: (text, record, index) => (
         <TestedCell text={text} record={record} index={index} />
       ),
@@ -171,6 +141,58 @@ function Home() {
     },
   ];
 
+  const options = {
+    yAxis: {
+      title: {
+        text: "",
+      },
+      crosshair: false,
+      labels: {
+        formatter: function () {
+          return "";
+        },
+      },
+    },
+    xAxis: {
+      title: {
+        text: "",
+      },
+      crosshair: false,
+      labels: {
+        formatter: function () {
+          return "";
+        },
+      },
+    },
+    plotOptions: {
+      line: {
+        marker: {
+          enabled: false,
+        },
+      },
+    },
+    chart: {
+      type: "spline",
+    },
+    title: {
+      text: "My stock chart",
+    },
+    series: [
+      {
+        data: [1, 2, 3, 4, 5, 6],
+      },
+    ],
+    responsive: {
+      rules: [
+        {
+          condition: {
+            maxWidth: 500,
+          },
+        },
+      ],
+    },
+  };
+
   const [placeHolder, setPlaceholderData] = useState("");
   const setPlaceHolder = useCallback(
     (data) => {
@@ -178,6 +200,12 @@ function Home() {
     },
     [placeHolder]
   );
+
+  const getState = () => {
+    <>
+      <p>Brijesh Savaliya</p>
+    </>;
+  };
   // const placeHolder = useMemo([]);
   return (
     <>
@@ -190,14 +218,14 @@ function Home() {
               </label>
               <div className={styles.line}></div>
               <div className={styles.search_wrapper}>
-                <Input type="text" placeholder={placeHolder} />
-                {/* <Typical
-                  steps={["Hello", 1000, "Hello world!", 500]}
-                  loop={Infinity}
-                  wrapper="p"
-                /> */}
+                <Input
+                  type="text"
+                  placeholder={placeHolder}
+                  onClick={getState}
+                />
+
+                <AutoType setPlaceHolder={setPlaceHolder} />
               </div>
-              <AutoType setPlaceHolder={setPlaceHolder} />
               <div className={styles.actions_panel}>
                 <div className={styles.action}>
                   <h5>01 Nov, 11:22 AM IST</h5>
@@ -235,6 +263,7 @@ function Home() {
             <div className={styles.minigraph}>
               <div className={styles.svg_parent}>
                 {/* <Line {...config}  /> */}
+                <HighchartsReact highcharts={Highcharts} options={options} />
               </div>
             </div>
           </div>
@@ -319,7 +348,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className={styles.home_left}></div>
+        <MapContainer />
       </div>
     </>
   );

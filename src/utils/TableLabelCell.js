@@ -1,10 +1,12 @@
 import { states } from "./constants";
 import { ArrowUpOutlined } from "@ant-design/icons";
+import "../utils/default.css";
+
 function StateLabelCell({ record, index }) {
   return (
-    <>
+    <div className="t-left">
       <p>{record && record[0] && states[record[0]]}</p>
-    </>
+    </div>
   );
 }
 
@@ -17,8 +19,8 @@ function ConfiremedCell({ record }) {
       ?.toString()
       .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   return (
-    <div style={{ textAlign: "end" }}>
-      <div style={{ textAlign: "end" }}>
+    <div className="t-end">
+      <div className="t-end is-confirmed">
         {deltaConf > 0 ? <ArrowUpOutlined /> : ""}
         <span>{deltaConf}</span>
       </div>
@@ -35,7 +37,7 @@ function ActivesCell({ record }) {
       ?.toString()
       .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   return (
-    <div>
+    <div className="t-end">
       <span>{totalConf}</span>
     </div>
   );
@@ -50,8 +52,8 @@ function RecoveredCell({ record }) {
       ?.toString()
       .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   return (
-    <div>
-      <div>
+    <div className="t-end">
+      <div className="is-recovered">
         <ArrowUpOutlined />
         <span>{deltarecovered}</span>
       </div>
@@ -69,8 +71,8 @@ function DeceasedCell({ record }) {
       ?.toString()
       .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   return (
-    <div>
-      <div>
+    <div className="t-end">
+      <div className="is-deceased">
         <ArrowUpOutlined />
         <span>{deltadeceased}</span>
       </div>
@@ -92,8 +94,8 @@ function TestedCell({ record }) {
   const deltatested = record && record[1] && record[1].delta.tested;
   const totaltested = record && record[1] && record[1].total.tested;
   return (
-    <div>
-      <div>
+    <div className="t-end">
+      <div className="is-tested ">
         <ArrowUpOutlined />
         <span>{numDifferentiation(deltatested)}</span>
       </div>
@@ -125,8 +127,8 @@ function VaccineDosesCell({ record }) {
 
   const totalvaccinated = vaccinated3 + vaccinated4;
   return (
-    <div>
-      <div>
+    <div className="t-end">
+      <div className="is-vaccinated">
         <ArrowUpOutlined />
         <span>{numDifferentiation(Math.round(deltavaccinated))}</span>
       </div>

@@ -56,3 +56,15 @@
 .ant-table-tbody {
   background: #f6f6f7;
 }
+
+.ant-table-tbody > tr > td {
+  border: 3px solid white;
+  padding: 0px 4px;
+  text-align: center;
+  font-family: "archia";
+  color: #6c757d;
+}
+
+.ant-table-thead > tr > th {
+  padding: 0 20px;
+}

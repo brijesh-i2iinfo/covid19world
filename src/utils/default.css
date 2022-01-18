@@ -1,0 +1,29 @@
+.t-left {
+  text-align: left;
+}
+.t-center {
+  text-align: center;
+}
+.t-right {
+  text-align: right;
+}
+.t-end {
+  text-align: end;
+}
+
+.is-confirmed {
+  color: #ff073a;
+}
+
+.is-recovered {
+  color: #28a745;
+}
+.is-deceased {
+  color: #6c757d;
+}
+.is-tested {
+  color: rgba(32, 26, 162, 0.8666666666666667);
+}
+.is-vaccinated {
+  color: #db5581;
+}
