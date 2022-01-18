@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Menubar from "./component/sidebar/Menubar";
+import Banner from "./component/Banner/banner";
+import Home from "./component/HomeContent/home";
+import 'antd/dist/antd.variable.min.css';
+// import './app.less';
+import "./App.css";
+// import { ConfigProvider } from "antd";
 
+// const config = ConfigProvider.config({
+//   theme: {
+//     primaryColor: "#FF0000",
+//   },
+//   lightTheme: {
+//     primaryColor: "#8da832",
+//   },
+// });
 function App() {
+  const [theme, setTheme] = useState("dark");
+
+  const changeTheme = (value) => {
+    console.log("value+-+-", value);
+    setTheme(value ? "dark" : "light");
+  };
+
+  console.log("theme", theme);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // <ConfigProvider config>
+      <div className="App" theme={theme}>
+        <Menubar theme={theme} changeTheme={changeTheme} />
+        <Banner theme={theme} changeTheme={changeTheme} />
+        <Home />
+      </div>
+    // </ConfigProvider>
   );
 }
 

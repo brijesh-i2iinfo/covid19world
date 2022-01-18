@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+.ant-menu {
+  background-color: #f6f6f7 !important;
+}
+.ant-menu-inline {
+  border-right: none;
+}
+.ant-menu-inline > .ant-menu-item {
+  height: 4.5rem;
+}
+.ant-menu-item .ant-menu-item-icon {
+  min-width: 28px;
+}
+.ant-menu-inline .ant-menu-item-selected:after {
+  opacity: 0;
+}
+
+.ant-table-tbody {
+  background: #f6f6f7;
+}
